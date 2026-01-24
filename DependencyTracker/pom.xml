@@ -12,8 +12,10 @@
 	<artifactId>dependencytracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dependencytracker</name>
-	<description>A java development tool for dependency tracker and visualization of dependency with auto application starter for failed application</description>
-	<url/>
+    <description>
+        DependencyTracker is a Java developer tool that analyzes application dependencies and visualizes class-level and package-level relationships as an interactive graph. A key feature of the library is its ability to automatically initialize and start the application even when startup errors occur, enabling developers to inspect dependency issues, detect circular references, and debug architecture problems without blocking the application lifecycle.
+    </description>
+    <url/>
 	<licenses>
 		<license/>
 	</licenses>
