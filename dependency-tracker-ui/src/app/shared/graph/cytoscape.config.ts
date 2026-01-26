@@ -32,5 +32,20 @@ export const CYTOSCAPE_STYLES: cytoscape.StylesheetJson = [
         "target-arrow-color": "red",
         "width": 3
       }
+    },
+    {
+      selector: "node.missing",
+      style: {
+        "background-color": "#e74c3c",
+        "text-outline-color": "#c0392b",
+      }
+    },
+    {
+      selector: "edge.missing",
+      style: {
+        "line-color": "#e74c3c",
+        "target-arrow-color": "#e74c3c",
+        "line-style": "dashed"
+      }
     }
 ]
