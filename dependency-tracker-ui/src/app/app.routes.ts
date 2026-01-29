@@ -9,7 +9,12 @@ export const routes: Routes = [
     {
         pathMatch: 'full',
         path: '',
-        redirectTo: '/dependencyTracker'
+        redirectTo: '/dashboard'
+    },
+
+    {
+        path: 'dashboard',
+        loadComponent: ()=>import('./pages/dashboard/dashboard.component').then(m=> m.DashBoardComponent)
     }
 
 ];

@@ -1,0 +1,59 @@
+@let node = selectedNode$ | async;
+
+@if (node) {
+<div class="bg-zinc-900 h-[50%] w-full">
+    <div class="w-66 h-full bg-zinc-900 text-zinc-100 border-l border-zinc-800
+         shadow-xl flex flex-col animate-slide-in">
+        <div class="px-5 py-4 border-b border-zinc-800">
+        <h2 class="text-lg font-semibold truncate">
+            {{ node.label }}
+        </h2>
+        <p class="text-xs text-zinc-400 break-all mt-1">
+            {{ node.id }}
+        </p>
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-6">
+            <div>
+                <h3 class="text-sm font-medium text-zinc-300 mb-2">
+                    Depends On
+                </h3>
+                @if (node.outgoingEdges.length>0) {
+                    <ul class="space-y-1">
+                        @for (dep of node.outgoingEdges; track $index) {
+                            <li class="text-sm bg-zinc-800 w-max rounded px-3 py-1
+                   hover:bg-zinc-700 transition">
+                                {{ dep }}
+                            </li>
+                        }
+                    </ul>
+                }@else {
+                    <p class="text-xs text-zinc-500 italic">
+                        No outgoing dependencies
+                    </p>
+                }   
+            </div>
+            <div>
+                <h3 class="text-sm font-medium text-zinc-300 mb-2">
+                    Used By
+                </h3>
+                @if (node.incomingEdges.length>0) {
+                        <ul
+                            class="space-y-1">
+                            @for (dep of node.incomingEdges; track $index) {
+                                <li
+                                    class="text-sm bg-zinc-800 w-max rounded px-3 py-1
+                                         hover:bg-zinc-700 transition">
+                                    {{ dep }}
+                                </li>
+                            }
+                        </ul>
+                }
+      
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+}
+@else {
+    <h1 class="my-[35vh]">Select a node to show its information</h1>
+}

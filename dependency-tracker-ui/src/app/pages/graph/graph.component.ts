@@ -3,7 +3,7 @@ import { GraphService } from "../../core/services/graph.service";
 import { map, Observable } from "rxjs";
 import { Bean } from "../../shared/models/bean";
 import cytoscape from "cytoscape";
-import { initializeGraphContainer } from "../../core/services/graph-initializer.service";
+import { GraphInitializerService } from "../../core/services/graph-initializer.service";
 
 @Component({
     selector: 'app-graph',
@@ -17,7 +17,7 @@ export class GraphComponent implements AfterViewInit, OnInit, OnDestroy {
 
     private cy!: cytoscape.Core;
 
-    constructor(private graphService: GraphService){
+    constructor(private graphService: GraphService, private graphInitializerService: GraphInitializerService) {
         this.data$ = graphService.graph$
     }
 
@@ -29,7 +29,7 @@ export class GraphComponent implements AfterViewInit, OnInit, OnDestroy {
         this.cy = cytoscape({
             container: this.graphContainer.nativeElement
         });
-        initializeGraphContainer(this.data$, this.cy);
+        this.graphInitializerService.initializeGraphContainer(this.data$, this.cy);
     }
 
     ngOnInit(): void {
