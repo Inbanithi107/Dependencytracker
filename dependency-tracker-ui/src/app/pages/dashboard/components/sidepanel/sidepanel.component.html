@@ -1,59 +1,113 @@
 @let node = selectedNode$ | async;
-
 @if (node) {
-<div class="bg-zinc-900 h-[50%] w-full">
-    <div class="w-66 h-full bg-zinc-900 text-zinc-100 border-l border-zinc-800
-         shadow-xl flex flex-col animate-slide-in">
-        <div class="px-5 py-4 border-b border-zinc-800">
-        <h2 class="text-lg font-semibold truncate">
-            {{ node.label }}
-        </h2>
-        <p class="text-xs text-zinc-400 break-all mt-1">
-            {{ node.id }}
-        </p>
-        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-6">
-            <div>
-                <h3 class="text-sm font-medium text-zinc-300 mb-2">
-                    Depends On
-                </h3>
-                @if (node.outgoingEdges.length>0) {
-                    <ul class="space-y-1">
-                        @for (dep of node.outgoingEdges; track $index) {
-                            <li class="text-sm bg-zinc-800 w-max rounded px-3 py-1
-                   hover:bg-zinc-700 transition">
-                                {{ dep }}
-                            </li>
-                        }
-                    </ul>
-                }@else {
-                    <p class="text-xs text-zinc-500 italic">
-                        No outgoing dependencies
-                    </p>
-                }   
-            </div>
-            <div>
-                <h3 class="text-sm font-medium text-zinc-300 mb-2">
-                    Used By
-                </h3>
-                @if (node.incomingEdges.length>0) {
-                        <ul
-                            class="space-y-1">
-                            @for (dep of node.incomingEdges; track $index) {
-                                <li
-                                    class="text-sm bg-zinc-800 w-max rounded px-3 py-1
-                                         hover:bg-zinc-700 transition">
-                                    {{ dep }}
-                                </li>
-                            }
-                        </ul>
-                }
+<div
+  class="w-80 bg-white rounded-2xl shadow-xl border border-slate-200
+         overflow-hidden transition-all duration-300 ease-out"
+>
+  
+  <div
+    class="bg-linear-to-r from-indigo-500 to-blue-600
+           px-4 py-3 text-white"
+  >
+    <div class="flex items-center gap-3">
       
-            </div>
-        </div>
+      <div
+        class="h-10 w-10 rounded-xl bg-white/20 flex items-center justify-center
+               ring-1 ring-white/40"
+      >
+        <div class="h-3 w-3 bg-white rounded-full"></div>
+      </div>
+
+      <div class="min-w-0">
+        <h3 class="text-sm font-semibold truncate">
+          {{node.label}}
+        </h3>
+        <p class="text-xs text-blue-100">
+          Service Node
+        </p>
+      </div>
     </div>
+  </div>
+
+  
+  <div class="p-4 space-y-5 text-sm">
+
+    
+    <div>
+      <p class="text-xs text-slate-500 mb-1">Full Class Name</p>
+      <p
+        class="font-mono text-xs bg-slate-100 rounded-lg px-2 py-1
+               break-all"
+      >
+        {{node.id}}
+      </p>
     </div>
+
+    
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <span
+          class="text-xs font-semibold px-2 py-0.5 rounded-full
+                 bg-blue-100 text-blue-700"
+        >
+          Depends On
+        </span>
+        <span class="text-xs text-slate-500">
+          {{node.outgoingEdges.length}}
+        </span>
+      </div>
+
+      <ul class="space-y-1">
+        @for (dep of node.outgoingEdges; track $index) {
+        <li
+          class="flex items-center gap-2 px-2 py-1 rounded-lg
+                 bg-blue-50 text-blue-800"
+        >
+          <span class="h-2 w-2 rounded-full bg-blue-500"></span>
+          {{dep.split('.').pop()}}
+        </li>
+      }
+        <li
+          class="flex items-center gap-2 px-2 py-1 rounded-lg
+                 bg-red-50 text-red-700"
+        >
+          <span class="h-2 w-2 rounded-full bg-red-500"></span>
+          MissingService
+        </li>
+      </ul>
     </div>
+
+    
+    <div>
+      <div class="flex items-center gap-2 mb-2">
+        <span
+          class="text-xs font-semibold px-2 py-0.5 rounded-full
+                 bg-emerald-100 text-emerald-700"
+        >
+          Used By
+        </span>
+        <span class="text-xs text-slate-500">
+          {{node.incomingEdges.length}}
+        </span>
+      </div>
+
+      <ul class="space-y-1">
+        @for (dep of node.incomingEdges; track $index) {
+        <li
+          class="flex items-center gap-2 px-2 py-1 rounded-lg
+                 bg-emerald-50 text-emerald-800"
+        >
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          {{dep.split('.').pop()}}
+        </li>
+      }
+      </ul>
+    </div>
+  </div>
+</div>
 }
 @else {
-    <h1 class="my-[35vh]">Select a node to show its information</h1>
+  <div class="h-full w-full flex items-center justify-center">
+    <div>Select a node to view details</div>
+  </div>
 }
