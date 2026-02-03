@@ -54,6 +54,7 @@ export class GraphInitializerService {
             this.sidePanelState.setSelectedNode({
                 id: node.id(),
                 label: node.data('label'),
+                annotations: node.data('annotations'),
                 outgoingEdges: node.outgoers('edge').targets().map(n=> n.id()),
                 incomingEdges: node.incomers('edge').sources().map(n=> n.id())
             })

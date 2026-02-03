@@ -19,6 +19,7 @@ export class SidePanelState {
 export type SelectedNode = {
     id: string;
     label: string;
+    annotations: string[];
     incomingEdges: string[];
     outgoingEdges: string[];
 }

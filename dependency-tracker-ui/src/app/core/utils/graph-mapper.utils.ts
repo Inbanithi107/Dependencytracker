@@ -13,7 +13,7 @@ export function mapDependenciesToGraphElements(data: Bean[]): GraphElement[] {
     data.forEach((item) => {
       if (!addedNodes.has(item.name)) {
         elements.push({
-          data: { id: item.name, label: item.name.split(".").pop() },
+          data: { id: item.name, label: item.name.split(".").pop(), annotations: item.annotations },
         });
         addedNodes.add(item.name);
       }
