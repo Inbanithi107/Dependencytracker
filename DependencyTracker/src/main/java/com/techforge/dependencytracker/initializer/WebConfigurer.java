@@ -23,6 +23,6 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/_next/**").addResourceLocations("classpath:/META-INF/resources/dependency-graph/_next/");
+        registry.addResourceHandler("/dependency-tracker/**").addResourceLocations("classpath:/META-INF/resources/dependency-tracker-ui/browser/");
     }
 }

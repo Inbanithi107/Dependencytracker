@@ -15,7 +15,7 @@ public class ResourceScanner {
 
     public InputStream getStream(String filename){
 
-        return loader.getResourceAsStream("META-INF/resources/dependency-graph/" + filename + ".html");
+        return loader.getResourceAsStream("META-INF/resources/dependency-tracker-ui/browser/" + filename + ".html");
 
     }
 

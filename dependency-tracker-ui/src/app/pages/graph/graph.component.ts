@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { GraphService } from "../../core/services/graph.service";
 import { map, Observable } from "rxjs";
 import { Bean } from "../../shared/models/bean";
 import cytoscape from "cytoscape";
-import { mapDependenciesToGraphElements } from "../../core/utils/graph-mapper.utils";
-import { CYTOSCAPE_STYLES } from "../../shared/graph/cytoscape.config";
+import { GraphInitializerService } from "../../core/services/graph-initializer.service";
 
 @Component({
     selector: 'app-graph',
@@ -18,7 +17,7 @@ export class GraphComponent implements AfterViewInit, OnInit, OnDestroy {
 
     private cy!: cytoscape.Core;
 
-    constructor(private graphService: GraphService){
+    constructor(private graphService: GraphService, private graphInitializerService: GraphInitializerService) {
         this.data$ = graphService.graph$
     }
 
@@ -27,23 +26,10 @@ export class GraphComponent implements AfterViewInit, OnInit, OnDestroy {
     
 
     ngAfterViewInit(): void {
-        this.data$.pipe(map(mapDependenciesToGraphElements)
-        ).subscribe({
-            next: (elements)=>{
-                this.cy = cytoscape({
-                    container: this.graphContainer.nativeElement,
-                    elements: elements,
-                    style: CYTOSCAPE_STYLES,
-                    layout: {
-                        name: 'cose',
-                        animate: true
-                    }
-                })
-            },
-            error: (err)=>{
-                console.error("Error resolving graph data:", err);
-            }    
+        this.cy = cytoscape({
+            container: this.graphContainer.nativeElement
         });
+        this.graphInitializerService.initializeGraphContainer(this.data$, this.cy);
     }
 
     ngOnInit(): void {

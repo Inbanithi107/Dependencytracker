@@ -23,7 +23,7 @@ public class DependencyTrackerController {
         return "index";
     }
 
-    @GetMapping("/dependencyTracker")
+    @GetMapping("/")
     public void serve(HttpServletResponse response) throws IOException {
             if (graphHtml == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -36,7 +36,7 @@ public class DependencyTrackerController {
 
     @PostConstruct
     public void init() throws IOException {
-        try(InputStream stream = scanner.getStream("graph")) {
+        try(InputStream stream = scanner.getStream("index")) {
             if(stream!=null){
                 this.graphHtml = stream.readAllBytes();
             }
