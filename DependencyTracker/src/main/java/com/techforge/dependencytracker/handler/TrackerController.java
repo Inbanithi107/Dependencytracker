@@ -17,15 +17,10 @@ public class TrackerController {
     @Autowired
     private ClassPathApplicationContextScanner scanner;
 
-    @GetMapping("/details")
+    @GetMapping("/dependency-details")
     public List<String> getDetails(){
         scanner.scan();
         return scanner.getDefinitions().stream().map(BeanDefinition::getBeanClassName).toList();
-    }
-
-    @GetMapping("/check")
-    public String get(){
-        return "hello";
     }
 
     @GetMapping("/graph")
