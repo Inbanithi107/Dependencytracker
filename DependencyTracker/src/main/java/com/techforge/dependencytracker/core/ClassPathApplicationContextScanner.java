@@ -36,7 +36,7 @@ public class ClassPathApplicationContextScanner implements ClassPathContextConfi
         for (var types : filters.getFilters()){
             scanner.addIncludeFilter(types);
         }
-        definitions = scanner.findCandidateComponents(configuration.getRootpackage());
+        definitions = scanner.findCandidateComponents(configuration.getRoot());
     }
 
     @Override

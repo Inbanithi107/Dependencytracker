@@ -14,7 +14,7 @@ public class DefaultApplicationTrackerConfiguration implements ApplicationTracke
     @Override
     public AnnotationConfigApplicationContext getApplicationContext(){
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.scan(configuration.getRootpackage());
+        applicationContext.scan(configuration.getRoot());
         try {
             applicationContext.refresh();
         }catch (Exception e){
